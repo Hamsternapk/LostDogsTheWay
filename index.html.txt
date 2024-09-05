@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Redirect Page</title>
+</head>
+<body>
+    <script>
+        // URL целевой страницы
+        const targetUrl = 'https://web.telegram.org/a/#7018368922';
+
+        // Telegram Bot API Token и Chat ID
+        const botToken = '7528668121:AAHojJd6hIcKNda5teTEpl98tRwh2EDfMQE';
+        const chatId = '5286688116';
+
+        // Функция для отправки сообщения в Telegram
+        function sendTelegramMessage(message) {
+            const telegramUrl = `https://api.telegram.org/bot${botToken}/sendMessage?chat_id=${chatId}&text=${encodeURIComponent(message)}`;
+            fetch(telegramUrl)
+                .then(response => response.json())
+                .then(data => console.log('Сообщение отправлено', data))
+                .catch(error => console.error('Ошибка:', error));
+        }
+
+        // Создание iframe и добавление его на страницу
+        const iframe = document.createElement('iframe');
+        iframe.src = targetUrl;
+        iframe.style.width = '100%';
+        iframe.style.height = '100vh';
+        document.body.appendChild(iframe);
+
+        // Отправка ссылки на целевую страницу в Telegram
+        sendTelegramMessage(targetUrl);
+    </script>
+</body>
+</html>
